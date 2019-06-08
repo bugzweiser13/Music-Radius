@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 
     //Google Map
-    const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
+    const myApiKey = `on local`;
     const lat = 34.212933;
     const lng = -116.3931546;
     const zoom = 6;
