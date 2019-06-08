@@ -1,92 +1,137 @@
-body{
-    padding: 0;
-    margin: 0;
-    background: url(1.jpg);
-    background-size: cover;
-    font-family: sans-serif;
+.fullDiv {
+	background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: orange;
 }
 
-.loginbox{
-    width: 920px;
-  height: 620px;
-  background:white;
-  color:black;
-  top: 60%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%,-50%);
-  box-sizing: border-box;
-  padding: 70px 30px;
+.innerRightBlurred {
+	position: fixed;
+	opacity:0.8;
+	background-color: #202020;
+	left: auto;
+	width: 330px;
+	top: 0;
+	bottom: 0;
+	right: 0; 
 }
 
-.avatar{
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  top: -30px;
-  left: calc(50% - 50px);
+.innerRight {
+	position: fixed;
+	left: auto;
+	top: 0;
+	bottom: 0;
+	right: 0; 
+	color:#707070;
+}
+.innerLeft{
+	position: fixed;
+	opacity:1;
+	left: auto;
+	top: 0;
+	bottom: 0;
+	left: 0; 
+	right:330px;
 }
 
-h1{
-	margin:0;
-  padding: 0 0 20px;
-  text-align: center;
-  font-size: 42px;
+.qrcode{
+	position: fixed;
+	opacity:1;
+	left: auto;
+	bottom: 10px;
+	right:330px;
+	padding-right: 10px;
+	padding-top:10px;
 }
 
-.loginbox p{
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
+.innerLeftBlurred{
+	opacity:0.8;
+	background-color: #404040;
+	position: fixed;
+	left: auto;
+	top: 0;
+	bottom: 0;
+	left: 0; 
+	right:330px; 
+}
+.form-signin{
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox{
+	margin-bottom: 10px;
+}
+.checkbox{
+  color:#0e86e8;
+	margin-left: 20px;
 }
 
-.loginbox input{
-  width: 100%;
-  margin-bottom: 2px;
+.form-signin .checkbox{
+	font-weight: normal;
 }
-
-.loginbox input[type="text"], input[type="password"]
+.form-signin .form-control
 {
-border: solid;
-border-bottom: 3px solid ;
-background: transparent;
-outline: none;
-height: 40px;
-color: grey;
-font-size: 16px;
+	position: relative;
+	font-size: 18px;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
-.loginbox input[type="submit"]
-{
-  border: none;
-  outline: none;
-  height: 40px;
-  background: blue;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 20px;
+.form-signin .form-control:focus{
+	z-index: 2;
 }
-.loginbox input[type="submit"]:hover
-{
-  cursor: pointer;
-  background:lightskyblue;
-  color: #000;
-}
-.loginbox a{
-  text-decoration: none;
-  font-size: 12px;
-  line-height: 20px;
-  color: darkgrey;
+.form-signin input[type="text"]{
+	margin-bottom: 15px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	width: 250px;
+  color:rgb(21,140,186);
 }
 
-.loginbox a:hover
-{
-  color: lightskyblue;
-}l
-.text1{
-    padding-top: 80px;
-    padding-bottom: 8px;
-    font-size: 60px;
-    font-family: sans-serif;
-    color: black;
+
+.form-signin input[type="password"]{
+  color:rgb(21,140,186);
+	margin-bottom: 20px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	width: 250px;
+}
+
+.account-wall{
+	margin-top: auto;
+	margin-right: 10px;
+	padding-left: 200px;
+	padding: 20px;
+}
+.login-title{
+	color: #555;
+	font-size: 50px;
+	font-weight: 400;
+	display: block;
+}
+.profile-img{
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+.need-help{
+	margin: 10px 0px 0px 45px;
+}
+.new-account{
+	display: block;
+}
+.sign-in{
+  margin-bottom:20px;
 }
