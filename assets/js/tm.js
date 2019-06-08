@@ -17,8 +17,12 @@ $(document).ready(function() {
     // console.log(database);
 
     //Google Map
+<<<<<<< HEAD
 
     const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
+=======
+    const myApiKey = `on local`;
+>>>>>>> 14e21d915b7c12cfdfb7f6f1841960e036576521
     const lat = 34.212933;
     const lng = -116.3931546;
     const zoom = 6;
@@ -170,6 +174,7 @@ $(document).ready(function() {
         });
         return false;
     });
+<<<<<<< HEAD
 
     function initMap() {
         var uluru = {
@@ -205,3 +210,6 @@ $(document).ready(function() {
         });
     }
 });
+=======
+});
+>>>>>>> 14e21d915b7c12cfdfb7f6f1841960e036576521
