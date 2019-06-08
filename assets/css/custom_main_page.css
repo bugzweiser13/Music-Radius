@@ -1,8 +1,12 @@
-#banner {
-    background-color: blue;
-    text-align: center;
+#map {
+    height: 100%;
 }
 
-#banner h1 {
-    color: white;
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 12px;
+    text-align: left;
 }
