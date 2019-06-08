@@ -3,6 +3,17 @@ $(document).ready(function() {
     //globals
     var searchLimit = 20;
 
+    //Google Map
+    //const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
+    const lat = 34.0407;
+    const lng = -118.2468;
+    // const zoom = 6;
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: { lat, lng }
+    });
+
     // //Initialize Firebase
     // var config = {
     //     apiKey: "AIzaSyBFViyub_erkStzv7HIeYmC7YP1LeisBOc",
@@ -15,57 +26,6 @@ $(document).ready(function() {
 
     // var database = firebase.database();
     // console.log(database);
-
-    //Google Map
-
-    const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
-    const lat = 34.212933;
-    const lng = -116.3931546;
-    const zoom = 6;
-
-    // const parentElement = document.getElementById(`map`); // a <div>
-    // const script = document.createElement(`script`);
-    // script.src = `https://maps.googleapis.com/maps/api/js?key=${myApiKey}`;
-    // script.async = true;
-    // script.defer = true;
-    // script.onload = function() {
-    //     new google.maps.Map(parentElement, {
-    //         center: { lat, lng },
-    //         zoom
-    //     });
-    //     //     // var myLatLng = (new google.maps.LatLng(lat, lng));
-
-    //     //     // var map = new google.maps.Map(document.getElementById('map'), {
-    //     //     //     zoom: zoom,
-    //     //     //     center: myLatLng
-    //     //     // });
-    //     //     // var marker = new google.maps.Marker({
-    //     //     //     position: myLatLng,
-    //     //     //     map: map,
-    //     //     // });
-    //     //     var myLatlng = new google.maps.LatLng(34.212933, -116.3931546);
-    //     //     var mapOptions = {
-    //     //         zoom: 7,
-    //     //         center: myLatlng
-    //     //     }
-    //     //     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    //     //     var marker = new google.maps.Marker({
-    //     //         position: myLatlng,
-    //     //         title: "Hello World!"
-    //     //     });
-    // };
-    // parentElement.insertBefore(script, null);
-
-    //globals
-    var searchLimit = 20;
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 6,
-        center: { lat, lng }
-    });
-
-    // //event search submission
-    // $("#submission").on('click', function() {
 
     //event search submission
     $("#submission").on('click', function() {
@@ -80,7 +40,7 @@ $(document).ready(function() {
         $.ajax({
             type: "GET",
             //global url
-            //url: "https://app.ticketmaster.com/discovery/v2/events.json?size=" + limit + "&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&genreId=" + genreInput + "",
+            //url: "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
             //la area url
             url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
@@ -106,14 +66,15 @@ $(document).ready(function() {
                     var showDate = (ticketMaster._embedded.events[i].dates.start.localDate);
                     var venue = (ticketMaster._embedded.events[i]._embedded.venues[0].name);
                     var saleDate = (ticketMaster._embedded.events[i].sales.public.startDateTime);
-                    //var ticketLink = (ticketMaster._embedded.events[i]._embedded.attractions[0].url); //artist tickets link
-                    var ticketLink = (ticketMaster._embedded.events[i].url) //direct event ticket link
-                        //ticket link population
+                    //artist tickets link
+                    //var ticketLink = (ticketMaster._embedded.events[i]._embedded.attractions[0].url); 
+                    //direct event ticket link
+                    var ticketLink = (ticketMaster._embedded.events[i].url);
+                    //ticket link population
                     var ticketUrl = `<a href=${ticketLink} target='_blank'>${ticketLink}</a>`;
                     var postalCode = (ticketMaster._embedded.events[i]._embedded.venues[0].postalCode);
                     localLat = parseFloat(ticketMaster._embedded.events[i]._embedded.venues[0].location.latitude);
                     localLng = parseFloat(ticketMaster._embedded.events[i]._embedded.venues[0].location.longitude);
-                    var info = (ticketMaster._embedded.events[i]._embedded.venues[0].location);
 
                     //table population alternative
                     // $("#event_info").append("<tr><td> " + name + " </td><td> " + showDateRtn + " </td><td> " + venue + " </td><td>" + saleDateRtn + " </td><td class='click'><a href='" + ticketLink + "' target='_blank'>" + ticketLink + "</a></td><tr>");
@@ -134,8 +95,6 @@ $(document).ready(function() {
                     salePop = saleDateRtn;
                     tktPop = ticketUrl;
 
-                    console.log("name: " + namePop);
-
                     initMap(
                         localLat,
                         localLng,
@@ -147,20 +106,20 @@ $(document).ready(function() {
                     );
 
                     //console log / debugging
-                    //console.log(search);
-                    console.log("------start of info #" + [i] + "------");
-                    //console.log("Artist: " + name);
-                    //console.log("Event Date: " + showDateRtn);
-                    console.log("Venue: " + venue);
-                    //console.log("Public Sale Date: " + saleDateRtn);
-                    //console.log("Tickets: " + ticketLink);
-                    //console.log("Event Postal Code: " + postalCode);
-                    console.log(info);
-                    console.log("Event longitude: " + localLng);
-                    console.log("Event latitude: " + localLat);
-                    console.log("lat type", (typeof parseInt(localLat)));
-                    console.log("-------end of info #" + [i] + "--------");
-                    //console.log(" ");
+                    // console.log(search);
+                    // console.log("------start of info #" + [i] + "------");
+                    // console.log("Artist: " + name);
+                    // console.log("Name: " + namePop);
+                    // console.log("Event Date: " + showDateRtn);
+                    // console.log("Venue: " + venue);
+                    // console.log("Public Sale Date: " + saleDateRtn);
+                    // console.log("Tickets: " + ticketLink);
+                    // console.log("Event Postal Code: " + postalCode);
+                    // console.log("Event longitude: " + localLng);
+                    // console.log("Event latitude: " + localLat);
+                    // console.log("lat type", (typeof parseInt(localLat)));
+                    // console.log("-------end of info #" + [i] + "--------");
+                    // console.log(" ");
 
                 }
             },
@@ -172,11 +131,14 @@ $(document).ready(function() {
     });
 
     function initMap() {
+
         var uluru = {
             lat: localLat,
-            lng: localLng
+            lng: localLng,
         };
-        console.log("This is: " + uluru);
+
+        //debugging function
+        // console.log(uluru);
 
         // var map = new google.maps.Map(document.getElementById('map'), {
         //     zoom: 6,
@@ -197,11 +159,22 @@ $(document).ready(function() {
 
         var marker = new google.maps.Marker({
             position: uluru,
-            map: map,
+            map: map
+        });
 
+        google.maps.event.addListener(marker, 'click', function() {
+            if (!marker.open) {
+                infowindow.open(map, marker);
+                marker.open = true;
+            } else {
+                infowindow.close();
+                marker.open = false;
+            }
+            google.maps.event.addListener(map, 'click', function() {
+                infowindow.close();
+                marker.open = false;
+            });
         });
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
+
     }
 });

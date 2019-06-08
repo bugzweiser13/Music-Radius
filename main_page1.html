@@ -22,42 +22,56 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10" id="input_form">
+            <div class="col-sm-12">
+                <div class="card card-default mt-2" id="user_info">
+                    <div class="card-header" style="font-weight: bolder;">
+                        Music Radius
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-sm-1"></div> -->
+            <div class="col-sm-12">
                 <div class="card card-default mt-2">
                     <div class="card-header" style="font-weight: bolder;">
-                        Event Search
+                        User Info
                     </div>
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <label for="genre">Genre Search:</label>
-                                <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <input type="text" id="user" style="text-align: center; font-style:italic;">
+                                <label for="genre">User Name</label>
                             </div>
-                            <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Submit</button>
+                            <div class="form-group">
+                                <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <label for="genre">Genre Selected</label>
+
+                                <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="card card-default mt-3">
                     <div class="card-header" style="font-weight: bolder;">
                         MAP
                     </div>
-                    <div class="card-body" style="height: 500px; max-height: 500px; overflow: auto;">
+                    <div class="card-body" style="height: 700px; max-height: 700px; overflow: auto;">
                         <div id="map"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-5">
-                <div class="card card-default mt-3">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default mt-3 mb-3">
                     <div class="card-header" style="font-weight: bolder;">
                         Event Info
                     </div>
