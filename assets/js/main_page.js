@@ -177,4 +177,8 @@ $(document).ready(function() {
         });
 
     }
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> efeb70726dfc2a1e90d06edcfb9383234af0f7c9
