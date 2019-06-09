@@ -79,7 +79,7 @@ $(document).ready(function() {
                     //table population alternative
                     // $("#event_info").append("<tr><td> " + name + " </td><td> " + showDateRtn + " </td><td> " + venue + " </td><td>" + saleDateRtn + " </td><td class='click'><a href='" + ticketLink + "' target='_blank'>" + ticketLink + "</a></td><tr>");
 
-                    //table population
+                    //data table population
                     var row = $("<tr>");
                     var tName = $("<td>").append(name);
                     var tShowDate = $("<td>").append(showDateRtn);
@@ -130,20 +130,13 @@ $(document).ready(function() {
         return false;
     });
 
+    //Google Map Marker Population, based on Ticketmaster Data
     function initMap() {
 
         var uluru = {
             lat: localLat,
             lng: localLng,
         };
-
-        //debugging function
-        // console.log(uluru);
-
-        // var map = new google.maps.Map(document.getElementById('map'), {
-        //     zoom: 6,
-        //     center: uluru
-        // });
 
         var contentString = '<div id=popUp>' +
             '<div id="title">Title: ' + namePop + '</div>' +
