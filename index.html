@@ -5,72 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Concerts Near Me</title>
+    <title>Music Radius</title>
     <link rel="icon" href="favicon.ico" />
     <!--style-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/custom_main_page.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!--Fonts-->
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="jumbotron mt-2" id="banner">
-            <h1>Concerts Near Me</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-8" id="map_layout">
-                <div class="card card-default mb-3">
-                    <div class="card-header" style="font-weight: bolder;">
-                        Map
-                    </div>
-                    <div class="card-body">
-                        <!-- style="height: 200px; max-height: 200px; overflow: auto;">-->
-
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d99850.39900068786!2d-117.34184610505122!3d33.97842910360063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1559696604327!5m2!1sen!2sus" width="600" height="450" frameborder="0"
-                            style="border:0" allowfullscreen></iframe>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4" id="user_info">
-                <div class="card card-default">
-                    <div class="card-header" style="font-weight: bolder;">
-                        User Information
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="inputEmployeeName1">Employee Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputRoll">Roll</label>
-                                <input type="text" class="form-control" id="roll" placeholder="Enter Roll / Duties">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputStartDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date (MM/DD/YYYY)">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputMonthyRate">Monthly Rate</label>
-                                <input type="number" min="1" step="any" class="form-control" id="monthRate" placeholder="Enter Monthy Pay Rate">
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="float: right;" id="user_submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+    <!-- Background img-->
+    <div class="fullDiv">
+        <div class="innerLeftBlurred"></div>
     </div>
-
+    <div class="innerRightBlurred"></div>
+    <div class="innerRight">
+        <div class="row">
+            <h1 class="text-center login-title"></h1>
+            <div class="account-wall">
+                <img class="profile-img" src="https://yt3.ggpht.com/-_tpjHFS11uI/AAAAAAAAAAI/AAAAAAAAAAA/pY-AjQcO2y0/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="">
+                <form class="form-signin">
+                    <input type="text" class="form-control" placeholder="Email" required autofocus>
+                    <input type="password" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-primary btn-block sign-in" type="submit">
+						Sign in
+					</button>
+                    <label class="checkbox pull-left">
+						<input type="checkbox" value="remember-me">
+						Remember me
+					</label>
+                    <a href="#" class="pull-right need-help">forgot password? </a>
+                </form>
+                <a href="#" class="text-center new-account">Create an account </a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
