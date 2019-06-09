@@ -5,36 +5,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Concerts Near Me</title>
+    <title>Show Me Shows</title>
     <link rel="icon" href="favicon.ico" />
-    <!--style-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/custom_main_page.css">
-    <!--Fonts-->
+    <!-- Link to Moment.js should go here -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- LINK TO FIREBASE GOES HERE -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
 </head>
 
 <body>
     <div class="container">
-        <div class="jumbotron mt-2" id="banner">
-            <h1>Concerts Near Me</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-default mt-2" id="user_info">
+                    <div class="card-header" style="font-weight: bolder;">
+                        Music Radius
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
-                <div class="card-header">Map</div>
-                <div class="card-body">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d99850.39900068786!2d-117.34184610505122!3d33.97842910360063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1559696604327!5m2!1sen!2sus" width="600" height="450" frameborder="0"
-                        style="border:0" allowfullscreen></iframe>
+            <!-- <div class="col-sm-1"></div> -->
+            <div class="col-sm-12">
+                <div class="card card-default mt-2">
+                    <div class="card-header" style="font-weight: bolder;">
+                        User Info
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" id="user" style="text-align: center; font-style:italic;">
+                                <label for="genre">User Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <label for="genre">Genre Selected</label>
 
+                                <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default mt-3">
+                    <div class="card-header" style="font-weight: bolder;">
+                        MAP
+                    </div>
+                    <div class="card-body" style="height: 700px; max-height: 700px; overflow: auto;">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default mt-3 mb-3">
+                    <div class="card-header" style="font-weight: bolder;">
+                        Event Info
+                    </div>
+                    <div class="card-body" style="height: 500px; max-height: 500px; overflow: auto;">
+                        <table class="table table-sm table-hover" style="text-align: center;">
+                            <thead class="thead-light">
+                                <tr style="font-weight: bolder;">
+                                    <th scope="col">Artist</th>
+                                    <th scope="col">Event Date</th>
+                                    <th scope="col">Venue</th>
+                                    <th scope="col">On Sale</th>
+                                    <th scope="col">Ticket Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="event_info">
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs">
+    </script>
+
 </body>
+
+<!--link to ticketmaster script-->
+<script src="assets/js/main_page.js "></script>
 
 </html>
