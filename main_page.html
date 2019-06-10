@@ -46,10 +46,13 @@
                                 <label for="genre">User Name</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
-                                <label for="genre">Genre Selected</label>
-
-                                <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Submit</button>
+                                <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <label for="genre">Genre Selected</label> -->
+                                <label for="genre">Select Genre to Search:	&nbsp;&nbsp;</label>
+                                <input type="radio" name="genre" id="genre" value="rock">Rock &nbsp;
+                                <input type="radio" name="genre" id="genre" value="metal">Metal &nbsp;
+                                <input type="radio" name="genre" id="genre" value="country">Country
+                                <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Search</button>
                             </div>
                         </form>
                     </div>
@@ -61,9 +64,10 @@
             <div class="col-md-12">
                 <div class="card card-default mt-3">
                     <div class="card-header" style="font-weight: bolder;">
-                        MAP
+                        Event Map (Click Location Markers for Event Info)
                     </div>
                     <div class="card-body" style="height: 700px; max-height: 700px; overflow: auto;">
+
                         <div id="map"></div>
                     </div>
                 </div>

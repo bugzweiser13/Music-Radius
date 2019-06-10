@@ -28,13 +28,25 @@ $(document).ready(function() {
     // console.log(database);
 
     //event search submission
+
     $("#submission").on('click', function() {
 
         //table clear with new search
         $("#event_info").empty();
 
         //search input
-        var genreInput = $("#genre").val().trim();
+        // var genreInput = $("#genre").val().trim();
+        var genreInput = $("input[name='genre']:checked").val();
+
+        // $("input[type='button']").click(function() {
+        //     var radioValue = $("input[name='genre']:checked").val();
+        //     if (radioValue) {
+        //         alert("Your are a - " + radioValue);
+        //     }
+        // });
+
+        console.log("Selected Genre is: " + genreInput);
+
 
         //data call
         $.ajax({
@@ -42,11 +54,13 @@ $(document).ready(function() {
             //global url
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
+            //US url
+            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+
             //la area url
             url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
-            //US url
-            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+
             dataType: "json",
             success: function(ticketMaster) {
                 console.log(ticketMaster);
@@ -133,7 +147,7 @@ $(document).ready(function() {
     //Google Map Marker Population, based on Ticketmaster Data
     function initMap() {
 
-        var uluru = {
+        var eventMarker = {
             lat: localLat,
             lng: localLng,
         };
@@ -151,7 +165,7 @@ $(document).ready(function() {
         });
 
         var marker = new google.maps.Marker({
-            position: uluru,
+            position: eventMarker,
             map: map
         });
 
