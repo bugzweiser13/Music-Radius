@@ -4,16 +4,13 @@ $(document).ready(function() {
      //need to get token to refresh based on login
      var accessToken = "BQDScDuL9lB8M5i33SL0MbF77FcHlE5ZCpgb2XxLyrmglBSLA2QuX9pQ2UqZ6cgeYMXDOVzM35n9f6lSzH3O1hfwB76mw5aXFizVCBFvAZNbnsnAge2SyocdDPrS8Fgaw4gtU9M81Sf2woy6NZ1bpilXhaMacP0vEliQj6AH3k1ma424dQP6XEUwX_QhRpLPt7wLAmhdzkatIQYsgMcL5UtD70IhGlCPTLat3MN4ZQybvCWOQgBpj-e5Nd3bbdUnXVoKOru49u0wlBb00WkI_8JzAp3iUcXukPg";
 
-    // window.onSpotifyWebPlaybackSDKReady = () => {
-    //     const token = '[My Spotify Web API access token]';
-    //     const player = new Spotify.Player({
-    //       name: 'Web Playback SDK Quick Start Player',
-    //       getOAuthToken: cb => { cb(accessToken); }
-    //     });
-      
-    //     // Connect to the player!
-    //     player.connect();
-    //   };
+    //possible spotify login
+    // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
+    // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
+    // var redirect_uri = 'enter http here'; // Your redirect uri
+    
+    // url: "https://accounts.spotify.com/authorize?client_id=" + client_id + "&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09",
+    // type: GET 
 
     //globals
     var searchLimit = 20;
