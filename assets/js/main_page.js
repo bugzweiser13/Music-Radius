@@ -59,7 +59,7 @@ $(document).ready(function() {
 
                 }
                 var albumDisplay = $("<image>");
-                albumDisplay.attr("id", "album_art");
+                albumDisplay.attr("id", "album_art1");
                 albumDisplay.attr("src", albumArt);
                 albumDisplay.attr("alt", "spotify album_art");
                 $("#album_art").append(albumDisplay);
