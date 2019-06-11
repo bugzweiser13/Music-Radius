@@ -4,10 +4,8 @@ $(document).ready(function() {
     var searchLimit = 20;
 
     //Google Map
-    //const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
     const lat = 34.0407;
     const lng = -118.2468;
-    // const zoom = 6;
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
@@ -28,7 +26,6 @@ $(document).ready(function() {
     // console.log(database);
 
     //event search submission
-
     $("#submission").on('click', function() {
 
         //table clear with new search
@@ -38,17 +35,38 @@ $(document).ready(function() {
         // var genreInput = $("#genre").val().trim();
         var genreInput = $("input[name='genre']:checked").val();
 
-        // $("input[type='button']").click(function() {
-        //     var radioValue = $("input[name='genre']:checked").val();
-        //     if (radioValue) {
-        //         alert("Your are a - " + radioValue);
-        //     }
-        // });
-
         console.log("Selected Genre is: " + genreInput);
 
+        //spodify data call
+        var accessToken = "BQDTZRCGeDU9_l0mTq716nSES4QblzbUNCYtQgBZqyEcuqmmylMzNhqbgZYjvHgKwH38SPIqg3A80O-G01mu1FfSacmQs79XoRLahTQASlDclWyHO00ls35P72UI7vixaIfNPra-5clTqt1IiJ_IPKDQkvwhaf6dBw";
 
-        //data call
+        $.ajax({
+            url: "https://api.spotify.com/v1/recommendations?seed_genres=" + genreInput + "",
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(spodify) {
+                console.log(spodify);
+
+                for (j = 0; j < searchLimit; j++) {
+
+                    var track = (spodify.tracks[j].external_urls.spotify);
+                    var albumArt = (spodify.tracks[0].album.images[1].url);
+
+                    console.log("Preview Track: " + track);
+                    console.log("Album Cover: " + albumArt);
+
+                }
+                var albumDisplay = $("<image>");
+                albumDisplay.attr("id", "album_art");
+                albumDisplay.attr("src", albumArt);
+                albumDisplay.attr("alt", "spotify album_art");
+                $("#album_art").append(albumDisplay);
+            }
+        });
+
+        //ticketmaster data call
         $.ajax({
             type: "GET",
             //global url
@@ -100,15 +118,19 @@ $(document).ready(function() {
                     var tVenue = $("<td>").append(venue);
                     var tSaleDate = $("<td>").append(saleDateRtn);
                     var tLink = $("<td>").append(ticketUrl);
+
+                    //append data to table
                     row.append(tName, tShowDate, tVenue, tSaleDate, tLink);
                     $("#event_info").append(row);
 
+                    //Map Marker Popup info
                     namePop = name;
                     venuePop = venue;
                     showPop = showDateRtn;
                     salePop = saleDateRtn;
                     tktPop = ticketUrl;
 
+                    //push to map function
                     initMap(
                         localLat,
                         localLng,
@@ -147,11 +169,13 @@ $(document).ready(function() {
     //Google Map Marker Population, based on Ticketmaster Data
     function initMap() {
 
+        //marker location placement
         var eventMarker = {
             lat: localLat,
             lng: localLng,
         };
 
+        //marker popup data display
         var contentString = '<div id=popUp>' +
             '<div id="title">Title: ' + namePop + '</div>' +
             '<div id="venue">Venue: ' + venuePop + '</div>' +
@@ -160,15 +184,18 @@ $(document).ready(function() {
             '<div id="tickets">Tickets: ' + tktPop + '</div>' +
             '</div>';
 
+        //marker popup window command
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
+        //marker popup creation / placement (from ticketmaster api data population)
         var marker = new google.maps.Marker({
             position: eventMarker,
             map: map
         });
 
+        //click listener to populate the marker info popup
         google.maps.event.addListener(marker, 'click', function() {
             if (!marker.open) {
                 infowindow.open(map, marker);

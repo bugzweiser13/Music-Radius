@@ -1,5 +1,5 @@
 body {
-    background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat;
+    /* background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -10,12 +10,22 @@ body {
     /* background-color: orange; */
 }
 
+
+/* 
+========================
+map info
+======================== 
+*/
+
 #map {
     height: 100%;
 }
 
 #mapContainer {
     background: transparent;
+    height: 670px;
+    max-height: 670px;
+    overflow: auto;
 }
 
 #mapBox {
@@ -23,15 +33,42 @@ body {
     max-height: 700px;
 }
 
+#popUp {
+    text-align: center;
+}
+
+
+/* 
+========================
+spotify info
+======================== 
+*/
+
+#album {
+    width: 94%;
+    height: 94%;
+    /* margin-left: 5px; */
+    box-shadow: 2px 5px 15px black;
+}
+
+.btn {
+    float: right;
+    font-style: italic;
+    box-shadow: 2px 5px 15px black;
+}
+
+
+/* 
+========================
+table info
+======================== 
+*/
+
 th {
     font-size: 14px;
 }
 
 td {
     font-size: 12px;
-    text-align: center;
-}
-
-#popUp {
     text-align: center;
 }

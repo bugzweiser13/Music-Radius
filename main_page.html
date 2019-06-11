@@ -34,12 +34,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-default mt-2">
+                <div class="card card-default mt-2" id="mapContainer">
                     <div class="card-header" style="font-weight: bolder;">
                         Event Map (Click Location Markers for Event Info)
                     </div>
-                    <div class="card-body" style="height: 675px; max-height: 675px; overflow: auto;">
-
+                    <div class="card-body">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
         </div>
         <div class="row">
             <!-- <div class="col-sm-1"></div> -->
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="card card-default mt-2">
                     <div class="card-header" style="font-weight: bolder;">
                         User Info
@@ -65,9 +64,29 @@
                                 <input type="radio" name="genre" id="genre" value="rock">Rock &nbsp;
                                 <input type="radio" name="genre" id="genre" value="metal">Metal &nbsp;
                                 <input type="radio" name="genre" id="genre" value="country">Country
-                                <button class="btn btn-primary" style="float: right; font-style:italic;" type="submit" id="submission">Search</button>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>
+                                <button class="btn btn-secondary" type="submit" id="clear">Clear Data</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-default mt-2">
+                    <div class="card-header" style="font-weight: bolder;">
+                        Spotify Playback
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4" id="album_art">
+                                <!-- <image alt="album_cover"></image> -->
+                            </div>
+                            <div class="col-sm-8">
+                                <p>track data</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
