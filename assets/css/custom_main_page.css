@@ -1,5 +1,5 @@
 body {
-    /* background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat; */
+    background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,7 +22,7 @@ map info
 }
 
 #mapContainer {
-    background: transparent;
+    /* background: transparent; */
     height: 670px;
     max-height: 670px;
     overflow: auto;
@@ -43,12 +43,29 @@ map info
 spotify info
 ======================== 
 */
+#spotify,
+#user_plot {
+        height: 240px;
+}
+
+#spotify2 {
+    background: url("../images/backgrounds/festival.jpg") no-repeat;
+    background-position-x: center;
+    background-size: cover;
+}
 
 #album {
-    width: 94%;
-    height: 94%;
+    width: 95%;
+    height: 95%;
     /* margin-left: 5px; */
     box-shadow: 2px 5px 15px black;
+}
+#player_layout {
+    margin-top: 7%;
+    width: 320px;
+    height: 80px;
+    box-shadow: 2px 5px 15px black;
+
 }
 
 .btn {

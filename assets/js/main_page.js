@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+     //spodify data token (needs to be updated by the hour)
+     //need to get token to refresh based on login
+     var accessToken = "BQDScDuL9lB8M5i33SL0MbF77FcHlE5ZCpgb2XxLyrmglBSLA2QuX9pQ2UqZ6cgeYMXDOVzM35n9f6lSzH3O1hfwB76mw5aXFizVCBFvAZNbnsnAge2SyocdDPrS8Fgaw4gtU9M81Sf2woy6NZ1bpilXhaMacP0vEliQj6AH3k1ma424dQP6XEUwX_QhRpLPt7wLAmhdzkatIQYsgMcL5UtD70IhGlCPTLat3MN4ZQybvCWOQgBpj-e5Nd3bbdUnXVoKOru49u0wlBb00WkI_8JzAp3iUcXukPg";
+
+    // window.onSpotifyWebPlaybackSDKReady = () => {
+    //     const token = '[My Spotify Web API access token]';
+    //     const player = new Spotify.Player({
+    //       name: 'Web Playback SDK Quick Start Player',
+    //       getOAuthToken: cb => { cb(accessToken); }
+    //     });
+      
+    //     // Connect to the player!
+    //     player.connect();
+    //   };
+
     //globals
     var searchLimit = 20;
 
@@ -11,6 +26,7 @@ $(document).ready(function() {
         zoom: 8,
         center: { lat, lng }
     });
+
 
     // //Initialize Firebase
     // var config = {
@@ -38,31 +54,39 @@ $(document).ready(function() {
         console.log("Selected Genre is: " + genreInput);
 
         //spodify data call
-        var accessToken = "BQDTZRCGeDU9_l0mTq716nSES4QblzbUNCYtQgBZqyEcuqmmylMzNhqbgZYjvHgKwH38SPIqg3A80O-G01mu1FfSacmQs79XoRLahTQASlDclWyHO00ls35P72UI7vixaIfNPra-5clTqt1IiJ_IPKDQkvwhaf6dBw";
-
         $.ajax({
             url: "https://api.spotify.com/v1/recommendations?seed_genres=" + genreInput + "",
             type: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             },
-            success: function(spodify) {
-                console.log(spodify);
+            success: function(spotify) {
+                console.log(spotify);
 
                 for (j = 0; j < searchLimit; j++) {
 
-                    var track = (spodify.tracks[j].external_urls.spotify);
-                    var albumArt = (spodify.tracks[0].album.images[1].url);
+                    // var track = (spotify.tracks[j].href);
+                    // var track = (spotify.tracks[j].uri);
+                    var track = (spotify.tracks[j].id);
+                    var albumArt = (spotify.tracks[j].album.images[0].url);
 
                     console.log("Preview Track: " + track);
                     console.log("Album Cover: " + albumArt);
 
                 }
-                var albumDisplay = $("<image>");
-                albumDisplay.attr("id", "album_art1");
+                var albumDisplay = $("<img>");
+                albumDisplay.attr("id", "album");
                 albumDisplay.attr("src", albumArt);
                 albumDisplay.attr("alt", "spotify album_art");
+                $("#album_art").empty();
                 $("#album_art").append(albumDisplay);
+
+                var trackDisplay = $("<iframe>");
+                trackDisplay.attr("src", "https://open.spotify.com/embed/track/" + track);
+                trackDisplay.attr("id", "player_layout")
+                // trackDisplay.attr("type" + "audio/mpeg");
+                $("#player").empty();
+                $("#player").append(trackDisplay);
             }
         });
 
