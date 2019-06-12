@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
+<head <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Show Me Shows</title>
@@ -12,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/custom_main_page.css">
     <!-- Link to Moment.js should go here -->
     <script src="https://momentjs.com/downloads/moment.js"></script>
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Orbitron|Monoton&display=swap" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -23,20 +25,22 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" id="banner">
             <div class="col-sm-12">
                 <div class="card card-default mt-2" id="user_info">
                     <div class="card-header" style="font-weight: bolder;">
-                        Music Radius
+                        <h2>Music Radius</h2>
+                        <button id="toggle" class="btn btn-primary">Toggle</button>
+                        <label for="toggle" style="float: right;">Toggle between Map & Table View:&nbsp;&nbsp;</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-default mt-2" id="mapContainer">
+                <div class="card card-default mt-3" id="mapContainer">
                     <div class="card-header" style="font-weight: bolder;">
-                        Event Map (Click Location Markers for Event Info)
+                        <h4>Event Map (Click Location Markers for Event Info)</h4>
                     </div>
                     <div class="card-body">
                         <div id="map"></div>
@@ -45,57 +49,12 @@
             </div>
         </div>
         <div class="row">
-            <!-- <div class="col-sm-1"></div> -->
-            <div class="col-sm-6">
-                <div class="card card-default mt-2" id="user_plot">
+            <div class="col-md-12">
+                <div class="card card-default mt-3" id="table">
                     <div class="card-header" style="font-weight: bolder;">
-                        User Info
+                        <h4>Event Information Table</h4>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" id="user" style="text-align: center; font-style:italic;">
-                                <label for="genre">User Name</label>
-                            </div>
-                            <div class="form-group">
-                                <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
-                                <label for="genre">Genre Selected</label> -->
-                                <label for="genre">Select Genre to Search:	&nbsp;&nbsp;</label>
-                                <input type="radio" name="genre" id="genre" value="rock">Rock &nbsp;
-                                <input type="radio" name="genre" id="genre" value="metal">Metal &nbsp;
-                                <input type="radio" name="genre" id="genre" value="country">Country
-                            </div>
-                            <div class="buttons">
-                                <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>
-                                <button class="btn btn-secondary" type="submit" id="clear">Clear Data</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card card-default mt-2" id="spotify">
-                    <div class="card-header" style="font-weight: bolder;">
-                        Spotify Playback
-                    </div>
-                    <div class="card-body" id="spotify2">
-                        <div class="row">
-                            <div class="col-sm-4" id="album_art">
-                                <!-- <image alt="album_cover"></image> -->
-                            </div>
-                            <div class="col-sm-8" id="player"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-default mt-2">
-                    <div class="card-header" style="font-weight: bolder;">
-                        Event Info
-                    </div>
-                    <div class="card-body" style="height: 500px; max-height: 500px; overflow: auto;">
                         <table class="table table-sm table-hover" style="text-align: center;">
                             <thead class="thead-light">
                                 <tr style="font-weight: bolder;">
@@ -117,7 +76,63 @@
             </div>
         </div>
 
+
+        <div class="row mt-4">
+            <!-- <div class="col-sm-1"></div> -->
+            <div class="col-sm-6">
+                <div class="card card-default" id="user_plot">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h3>User Info</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <!-- <input type="text" id="user" style="text-align: center; font-style:italic;"> -->
+                                <div id="uName">
+                                    <h3>
+                                        < "User Name Here">
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <label for="genre">Genre Selected</label> -->
+                                <label for="genre">Select Genre to Search:	&nbsp;&nbsp;</label>
+                                <input type="radio" name="genre" id="genre" value="rock">Rock &nbsp;
+                                <input type="radio" name="genre" id="genre" value="metal">Metal &nbsp;
+                                <input type="radio" name="genre" id="genre" value="country">Country &nbsp;
+                                <input type="radio" name="genre" id="genre" value="rap">Rap
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>
+                                <button class="btn btn-secondary" type="submit" id="clear">Clear Data</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-default mb-5" id="spotify">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h3>Spotify Playback</h3>
+                    </div>
+                    <div class="card-body mb-1" id="spotify2">
+                        <div class="row">
+                            <div class="col-sm-4" id="album_art">
+                                <!-- <image alt="album_cover"></image> -->
+                            </div>
+                            <div class="col-sm-8" id="player"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- <div class="row">
+        <div class="col-sm-11" id="fill"></div>
+
+
+    </div> -->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs">
     </script>

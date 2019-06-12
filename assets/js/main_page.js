@@ -1,18 +1,17 @@
 $(document).ready(function() {
 
-     //spodify data token (needs to be updated by the hour)
-     //need to get token to refresh based on login
-     var accessToken = "BQDScDuL9lB8M5i33SL0MbF77FcHlE5ZCpgb2XxLyrmglBSLA2QuX9pQ2UqZ6cgeYMXDOVzM35n9f6lSzH3O1hfwB76mw5aXFizVCBFvAZNbnsnAge2SyocdDPrS8Fgaw4gtU9M81Sf2woy6NZ1bpilXhaMacP0vEliQj6AH3k1ma424dQP6XEUwX_QhRpLPt7wLAmhdzkatIQYsgMcL5UtD70IhGlCPTLat3MN4ZQybvCWOQgBpj-e5Nd3bbdUnXVoKOru49u0wlBb00WkI_8JzAp3iUcXukPg";
+    //globals
+
+    //spodify data token (needs to be updated by the hour)
+    //need to get token to refresh based on login
+    var accessToken = "BQCB3BHfBxcC29Yxp1pLKyynIs6_W6vc0BSAhUH48f_uOUQ6xuQo7QL5MKrK5ODAs3ir7BfvAFzRoEv-4XcKQuE_9tApsKCVzI31XNpOY1B0P8Q05W34HPWf76sSYnPOgqTW-YbnMIRTwR8uT2HI68JtDceyGPgpuHkQOyyKE0Q0b2slkT2QLgv9eiVYLmNay0AsBlxUiK0VORTTUnIMgpZlAqgYE5ouJpHKbVMcxuMByv-3jkien8X7JNGY2jgAOvVxudh_LYgOsfBNeAp2V6XBnVb_LAxOerc";
 
     //possible spotify login
     // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
     // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
     // var redirect_uri = 'enter http here'; // Your redirect uri
-    
-    // url: "https://accounts.spotify.com/authorize?client_id=" + client_id + "&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09",
-    // type: GET 
 
-    //globals
+    //data search limit (perfomrance)
     var searchLimit = 20;
 
     //Google Map
@@ -23,7 +22,6 @@ $(document).ready(function() {
         zoom: 8,
         center: { lat, lng }
     });
-
 
     // //Initialize Firebase
     // var config = {
@@ -67,8 +65,8 @@ $(document).ready(function() {
                     var track = (spotify.tracks[j].id);
                     var albumArt = (spotify.tracks[j].album.images[0].url);
 
-                    console.log("Preview Track: " + track);
-                    console.log("Album Cover: " + albumArt);
+                    // console.log("Preview Track: " + track);
+                    // console.log("Album Cover: " + albumArt);
 
                 }
                 var albumDisplay = $("<img>");
@@ -81,7 +79,7 @@ $(document).ready(function() {
                 var trackDisplay = $("<iframe>");
                 trackDisplay.attr("src", "https://open.spotify.com/embed/track/" + track);
                 trackDisplay.attr("id", "player_layout")
-                // trackDisplay.attr("type" + "audio/mpeg");
+                    // trackDisplay.attr("type" + "audio/mpeg");
                 $("#player").empty();
                 $("#player").append(trackDisplay);
             }
@@ -232,4 +230,36 @@ $(document).ready(function() {
         });
 
     }
+
+    $("#toggle").on('click', function() {
+        var $div1 = $('#mapContainer'),
+            $div2 = $('#table')
+
+        if ($div1.is(':visible')) {
+            $div1.hide();
+            $div2.show();
+        } else if ($div1.is(':visible') && $div2.is(':hidden')) {
+            $div2.show();
+        } else {
+            $div1.show();
+            $div2.hide();
+        }
+    });
+
+    // var toggle = $("#toggle");
+    // var mapHide = $('#mapContainer');
+    // var tableHide = $('#table');
+
+    // tableHide.toggle();
+
+    // toggle.click(function(e) {
+    //     mapHide.toggle();
+
+
+    //     if (mapHide.css('map') == 'none') {
+    //         toggle.val(tableHide.text());
+    //     } else {
+    //         toggle.val(mapHide.text());
+    //     }
+    // });
 });
