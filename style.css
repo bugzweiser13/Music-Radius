@@ -113,7 +113,8 @@
 }
 .login-title{
 	color: #555;
-	font-size: 50px;
+  font-size: 90px;
+  font:Serif;
 	font-weight: 400;
 	display: block;
 }
