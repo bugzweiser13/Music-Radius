@@ -36,6 +36,11 @@ $(document).ready(function() {
     // var database = firebase.database();
     // console.log(database);
 
+    //reset page
+    $("#reset").click(function() {
+        document.location.reload();
+    });
+
     //event search submission
     $("#submission").on('click', function() {
 
