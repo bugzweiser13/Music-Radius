@@ -4,7 +4,7 @@
 <head <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show Me Shows</title>
+    <title>Music Radius</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -25,20 +25,20 @@
 
 <body>
     <div class="container">
-        <div class="row" id="banner">
-            <div class="col-sm-12">
-                <div class="card card-default mt-2" id="user_info">
+        <div class="row">
+            <div class="col-sm-12" id="banner">
+                <div class="card card-default mt-2" id="testt">
                     <div class="card-header" style="font-weight: bolder;">
                         <h2>Music Radius</h2>
                         <button id="toggle" class="btn btn-primary">Toggle</button>
-                        <label for="toggle" style="float: right;">Toggle between Map & Table View:&nbsp;&nbsp;</label>
+                        <label for="toggle" style="float: right; font-style: italic;">Switch Between Map & Table View:&nbsp;&nbsp;</label>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-default mt-3" id="mapContainer">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="card card-default mt-2" id="mapContainer">
                     <div class="card-header" style="font-weight: bolder;">
                         <h4>Event Map (Click Location Markers for Event Info)</h4>
                     </div>
@@ -48,9 +48,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row ">
             <div class="col-md-12">
-                <div class="card card-default mt-3" id="table">
+                <div class="card card-default mt-2" id="table">
                     <div class="card-header" style="font-weight: bolder;">
                         <h4>Event Information Table</h4>
                     </div>
@@ -77,7 +77,7 @@
         </div>
 
 
-        <div class="row mt-4">
+        <div class="row mt-2">
             <!-- <div class="col-sm-1"></div> -->
             <div class="col-sm-6">
                 <div class="card card-default" id="user_plot">
@@ -97,11 +97,11 @@
                             <div class="form-group">
                                 <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
                                 <label for="genre">Genre Selected</label> -->
-                                <label for="genre">Select Genre to Search:	&nbsp;&nbsp;</label>
-                                <input type="radio" name="genre" id="genre" value="rock">Rock &nbsp;
-                                <input type="radio" name="genre" id="genre" value="metal">Metal &nbsp;
-                                <input type="radio" name="genre" id="genre" value="country">Country &nbsp;
-                                <input type="radio" name="genre" id="genre" value="rap">Rap
+                                <label for="genre"><h6>Select Genre to Search:</h6>	&nbsp;&nbsp;</label>
+                                <input type="radio" name="genre" id="genre" value="rock">&nbsp;Rock &nbsp;
+                                <input type="radio" name="genre" id="genre" value="metal">&nbsp;Metal &nbsp;
+                                <input type="radio" name="genre" id="genre" value="country">&nbsp;Country &nbsp;
+                                <input type="radio" name="genre" id="genre" value="rap">&nbsp;Rap
                             </div>
                             <div class="buttons">
                                 <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>

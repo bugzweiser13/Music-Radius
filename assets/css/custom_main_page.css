@@ -11,9 +11,24 @@ body {
     background-color: orange; */
 }
 
+#testt {
+    background: url("../images/backgrounds/concrete_seamless.png");
+    /* background-size: cover; */
+}
+
 #banner h2 {
-    font-size: 50px;
+    font-size: 60px;
     font-family: Monoton;
+    text-shadow: 2px 2px lightblue;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Orbitron;
+    text-shadow: 2px 2px lightblue;
 }
 
 
@@ -25,6 +40,8 @@ map info
 
 #map {
     height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 #mapContainer {
@@ -32,6 +49,7 @@ map info
     height: 575px;
     max-height: 575px;
     overflow: none;
+    box-shadow: 2px 5px 15px black;
 }
 
 #toggle {
@@ -58,13 +76,14 @@ spotify info
 
 #spotify,
 #user_plot {
-    height: 240px;
+    height: 260px;
+    box-shadow: 2px 5px 15px black;
 }
 
 #spotify2 {
     background: url("../images/backgrounds/festival.jpg") no-repeat;
     background-position-x: center;
-    background-size: cover;
+    /* background-size: cover; */
 }
 
 #album {
@@ -99,10 +118,13 @@ table info
     height: 575px;
     max-height: 575px;
     overflow: auto;
+    box-shadow: 2px 5px 15px black;
 }
 
 th {
     font-size: 14px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 td {

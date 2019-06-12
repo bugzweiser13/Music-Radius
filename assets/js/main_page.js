@@ -4,14 +4,14 @@ $(document).ready(function() {
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
-    var accessToken = "BQCB3BHfBxcC29Yxp1pLKyynIs6_W6vc0BSAhUH48f_uOUQ6xuQo7QL5MKrK5ODAs3ir7BfvAFzRoEv-4XcKQuE_9tApsKCVzI31XNpOY1B0P8Q05W34HPWf76sSYnPOgqTW-YbnMIRTwR8uT2HI68JtDceyGPgpuHkQOyyKE0Q0b2slkT2QLgv9eiVYLmNay0AsBlxUiK0VORTTUnIMgpZlAqgYE5ouJpHKbVMcxuMByv-3jkien8X7JNGY2jgAOvVxudh_LYgOsfBNeAp2V6XBnVb_LAxOerc";
+    var accessToken = "BQB5UPjLq1om4jDFVvh1yCawD3IkuroReYGEEaqINPtztV0CdNiPSHOVeFb4MtsO3RuQkSTX5WeD7dE8TS0w1kQ4BSqQxONvkuVhHhM-t73qyACElc4e_9dRYvULNkzUhf0lZDvkJ_2dFM8khK8IR_cokg0V2BCBZk7myAvKmFEfjFKIcHn45A95rwIsJTLHXGjxrQGrmFKNXHzaPd0oxZPkyUvbFGRkr6YpObDkxw-dIGMq2y8sbkK0945BrexKns7EcR6m6Ly5wxNR8wtairnmCf-j2ACnmG8";
 
     //possible spotify login
     // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
     // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
     // var redirect_uri = 'enter http here'; // Your redirect uri
 
-    //data search limit (perfomrance)
+    //data search limit (performance)
     var searchLimit = 20;
 
     //Google Map
@@ -58,30 +58,69 @@ $(document).ready(function() {
             success: function(spotify) {
                 console.log(spotify);
 
-                for (j = 0; j < searchLimit; j++) {
+                // for (j = 0; j < searchLimit; j++) {
 
-                    // var track = (spotify.tracks[j].href);
-                    // var track = (spotify.tracks[j].uri);
-                    var track = (spotify.tracks[j].id);
-                    var albumArt = (spotify.tracks[j].album.images[0].url);
+                //     // different track links
+                //     // var track = (spotify.tracks[j].href);
+                //     // var track = (spotify.tracks[j].uri);
+                //     var track = (spotify.tracks[j].id);
+                //     var albumArt = (spotify.tracks[j].album.images[0].url);
 
-                    // console.log("Preview Track: " + track);
-                    // console.log("Album Cover: " + albumArt);
+                //     //data return
+                //     // console.log("Preview Track: " + track);
+                //     // console.log("Album Cover: " + albumArt);
+                // }
 
-                }
-                var albumDisplay = $("<img>");
-                albumDisplay.attr("id", "album");
-                albumDisplay.attr("src", albumArt);
-                albumDisplay.attr("alt", "spotify album_art");
-                $("#album_art").empty();
-                $("#album_art").append(albumDisplay);
 
-                var trackDisplay = $("<iframe>");
-                trackDisplay.attr("src", "https://open.spotify.com/embed/track/" + track);
-                trackDisplay.attr("id", "player_layout")
-                    // trackDisplay.attr("type" + "audio/mpeg");
-                $("#player").empty();
-                $("#player").append(trackDisplay);
+                //album art display within the img tag
+                //cover will cycle thru every 30 seconds
+                //cover will match song playing
+                (function albumDisplay() {
+
+                    var l = 0
+
+                    function goA() {
+
+                        var albumDisplay = $("<img>");
+                        var albumSkip = (spotify.tracks[l].album.images[0].url);
+                        if (l++ < 20) {
+                            setTimeout(goA, 40000);
+                        }
+
+                        albumDisplay.attr("id", "album");
+                        albumDisplay.attr("src", albumSkip);
+                        albumDisplay.attr("alt", "spotify album_art");
+                        $("#album_art").empty();
+                        $("#album_art").append(albumDisplay);
+                    }
+                    goA();
+                })();
+
+                //music player display within the iframe
+                //song will cycle thru every 30 seconds
+                //song playing will match the album art within the img tag
+                (function playerDisplay() {
+
+                    var k = 0
+
+                    function goP() {
+
+                        var trackDisplay = $("<iframe>");
+                        var trackSkip = (spotify.tracks[k].id);
+                        if (k++ < 20) {
+                            setTimeout(goP, 40000);
+                        }
+
+                        trackDisplay.attr("src", "https://open.spotify.com/embed/track/" + trackSkip + "&autoplay=true");
+                        trackDisplay.attr("id", "player_layout")
+                            // trackDisplay.attr("type" + "audio/mpeg");
+                        $("#player").empty();
+                        $("#player").append(trackDisplay);
+
+                        //console.log(trackSkip);
+                    }
+                    goP();
+                })();
             }
         });
 
@@ -231,6 +270,7 @@ $(document).ready(function() {
 
     }
 
+    //toggle between map and table view for events
     $("#toggle").on('click', function() {
         var $div1 = $('#mapContainer'),
             $div2 = $('#table')
@@ -245,21 +285,4 @@ $(document).ready(function() {
             $div2.hide();
         }
     });
-
-    // var toggle = $("#toggle");
-    // var mapHide = $('#mapContainer');
-    // var tableHide = $('#table');
-
-    // tableHide.toggle();
-
-    // toggle.click(function(e) {
-    //     mapHide.toggle();
-
-
-    //     if (mapHide.css('map') == 'none') {
-    //         toggle.val(tableHide.text());
-    //     } else {
-    //         toggle.val(mapHide.text());
-    //     }
-    // });
 });
