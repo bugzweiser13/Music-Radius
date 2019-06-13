@@ -11,7 +11,7 @@ body {
     background-color: orange; */
 }
 
-#testt {
+#banner {
     background: url("../images/backgrounds/concrete_seamless.png");
     /* background-size: cover; */
 }
@@ -55,13 +55,6 @@ map info
 #toggle {
     float: right;
 }
-
-
-/* 
-#mapBox {
-    height: 710px;
-    max-height: 710px;
-} */
 
 #popUp {
     text-align: center;
@@ -130,7 +123,17 @@ td {
     text-align: center;
 }
 
+#user_info {
+    background: url("../images/backgrounds/surfing.jpg") no-repeat;
+    background-position-x: center;
+    height: 60%;
+    color: white;
+    font-weight: bolder;
+    font-size: 18px;
+    text-shadow: 2px 2px blue;
+}
 
-/* #fill {
-    height: 20px;
-} */
+#user_info h3,
+#user_info h6 {
+    text-shadow: 2px 2px blue;
+}
