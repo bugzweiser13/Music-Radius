@@ -1,11 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-html {
-    background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat;
-    font-family: 'Montserrat', sans-serif;
-}
-
 body {
     background: url('https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2017/03/09123720/EDM-lights-EDC.jpg') no-repeat;
+    background-size: cover;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -14,11 +10,15 @@ body {
 }
 
 #header {
-    font-size: 240px;
-    font-family: Monoton;
+    /* font-size: 240px; */
     text-shadow: 2px 2px lightblue;
     background: #020202;
     opacity: 0.8;
+}
+
+#header h1 {
+    font-family: Monoton;
+    font-size: 80px;
 }
 
 a {
@@ -69,44 +69,46 @@ input:focus {
 }
 
 #name {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
 #email {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
 #pass {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
 #user {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
-#genre1 {
-    border-bottom: 1px solid #0e86e8;
+
+/* #zip {
+    border-bottom: 1px solid #f2b07e;
+    color: #0e86e8;
+} */
+
+
+/* #genre1 {
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
 #genre2 {
-    border-bottom: 1px solid #0e86e8;
-    color: #0e86e8;
-}
-
-#zip {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
 }
 
 #genre3 {
-    border-bottom: 1px solid #0e86e8;
+    border-bottom: 1px solid #f2b07e;
     color: #0e86e8;
-}
+} */
 
 label {
     color: rgb(245, 247, 248);
@@ -115,7 +117,7 @@ label {
     letter-spacing: 4px;
 }
 
-#button {
+#submitbtn {
     background: none;
     border: none;
     width: 100%;
@@ -148,16 +150,17 @@ label {
     /* IE6-9 */
 }
 
-#button:hover {
-    background-position: -400px;
+#dropdown1 select {
+    width: 275px;
+    margin-left: 2%;
 }
 
-html {
-    background: url(https://whatjackhasmade.co.uk/my_images/15.10.15%20-%20Replicate%20Form/images/sun.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+#dropdown2 select {
+    margin-left: 2%;
+}
+
+#button:hover {
+    background-position: -400px;
 }
 
 form {

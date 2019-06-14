@@ -1,28 +1,5 @@
 $(document).ready(function() {
 
-    //globals
-
-    //spodify data token (needs to be updated by the hour)
-    //need to get token to refresh based on login
-    var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
-
-    //possible spotify login
-    // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
-    // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
-    // var redirect_uri = 'enter http here'; // Your redirect uri
-
-    //data search limit (performance)
-    var searchLimit = 30;
-
-    //Google Map
-    const lat = 34.0407;
-    const lng = -118.2468;
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: { lat, lng }
-    });
-
     // //Initialize Firebase
     // var config = {
     //     apiKey: "AIzaSyBFViyub_erkStzv7HIeYmC7YP1LeisBOc",
@@ -36,6 +13,96 @@ $(document).ready(function() {
     // var database = firebase.database();
     // console.log(database);
 
+    //globals
+
+    //spodify data token (needs to be updated by the hour)
+    //need to get token to refresh based on login
+    var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
+    var areaCode = 385;
+    var mapCenter;
+
+    //possible spotify login
+    // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
+    // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
+    // var redirect_uri = 'enter http here'; // Your redirect uri
+
+    //data search limit (performance)
+    var searchLimit = 30;
+
+    //google map opening
+    //usa center
+    // const lat = 37.09024;
+    // const lng = -95.712891;
+
+    //la center
+    // const lat = 34.0407;
+    // const lng = -118.2468;
+
+    //map load variables
+    var areaCodePos = [{
+            name: "la",
+            code: 324,
+            position: {
+                lat: 34.0407,
+                lng: -118.2468
+            }
+        },
+        {
+            name: "ny",
+            code: 345,
+            position: {
+                lat: 25.7617,
+                lng: -74.0060
+            }
+        },
+        {
+            name: "mia",
+            code: 334,
+            position: {
+                lat: 26.1224,
+                lng: -80.1373
+            }
+        },
+        {
+            name: "sea",
+            code: 385,
+            position: {
+                lat: 47.6062,
+                lng: -122.3321
+            }
+        }
+    ];
+
+    //debugging
+    console.log(areaCode);
+    console.log(areaCodePos[0].code);
+
+    //map load position
+    if (areaCode === areaCodePos[0].code) {
+        mapCenter = areaCodePos[0].position
+    } else if (areaCode === areaCodePos[1].code) {
+        mapCenter = areaCodePos[1].position
+    } else if (areaCode === areaCodePos[2].code) {
+        mapCenter = areaCodePos[2].position
+    } else if (areaCode === areaCodePos[3].code) {
+        mapCenter = areaCodePos[3].position
+    };
+
+    //debugging
+    console.log(mapCenter);
+
+    //selectable
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: mapCenter
+    });
+
+    //la area map
+    // var map = new google.maps.Map(document.getElementById('map'), {
+    //     zoom: 8,
+    //     center: { lat, lng }
+    // });
+
     //reset page
     $("#reset").click(function() {
         document.location.reload();
@@ -48,8 +115,7 @@ $(document).ready(function() {
         $("#event_info").empty();
 
         //search input
-        //var postalCode = $("#postalCode").val().trim();
-        // var postalCode = 90210;
+        //var areaCode = $("#areaCode").val().trim();
         // var genreInput = $("#genre").val().trim();
         var genreInput = $("input[name='genre']:checked").val().trim();
 
@@ -141,19 +207,21 @@ $(document).ready(function() {
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "&postalCode=" + postalCode + "&radius=" + radius + "&unit=miles",
 
             //la area url
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+            //url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
+            //selectable area
+            url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=" + areaCode + "&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
             dataType: "json",
             success: function(ticketMaster) {
                 console.log(ticketMaster);
+
                 //console.log("Genre Requested: " + genreInput);
-                //console.log(" ");
+                console.log("Area Code:  " + areaCode);
 
                 for (i = 0; i < searchLimit; i++) {
                     //main search variable
                     //var search = (ticketMaster._embedded.events[i]);
-                    console.log(i);
 
                     //date formats
 

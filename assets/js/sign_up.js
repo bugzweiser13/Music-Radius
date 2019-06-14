@@ -16,7 +16,7 @@
  var email = "";
  var userName = "";
  var password = "";
- var zip = "";
+ var areaCode = "";
  var genre1 = "";
  var genre2 = "";
  var genere3 = "";
@@ -30,7 +30,7 @@
      var email = $('#email').val().trim();
      var userName = $('#user').val().trim();
      var password = $('#pass').val().trim();
-     var zip = $('#zip').val().trim();
+     var areaCode = $('#areaCode').val().trim();
      var genre1 = $('#genre1').val().trim();
      var genre2 = $('#genre2').val().trim();
      var genre3 = $('#genre3').val().trim();
@@ -41,7 +41,7 @@
          email: email,
          userName: userName,
          password: password,
-         zip: zip,
+         areaCode: areaCode,
          genre1: genre1,
          genre2: genre2,
          genre3: genre3
@@ -56,6 +56,7 @@
      console.log(snapshot.val().email);
      console.log(snapshot.val().userName);
      console.log(snapshot.val().password);
+     console.log(snapshot.val().areaCode);
      console.log(snapshot.val().genre1);
      console.log(snapshot.val().genre2);
      console.log(snapshot.val().genre3);
