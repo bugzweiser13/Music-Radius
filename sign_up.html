@@ -3,14 +3,19 @@
 <html>
 
 <head>
-    <title>Sign Up</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music Radius Sign Up Page</title>
+    <link rel="icon" href="favicon.ico" />
+    <!-- CSS -->
     <link rel="stylesheet" text="text/css" href="assets/css/custom_sign_up.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Orbitron|Monoton&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" />
 
     <!-- LINK TO FIREBASE GOES HERE -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
@@ -42,7 +47,7 @@
                         <label text="text" for="user"></label>
                         <input type="text" id="user" placeholder="Pick a Username" required />
                         <label type="text" for="pass"></label>
-                        <input type="text" id="pass" placeholder="Set a Password" required />
+                        <input type="text" id="pass" placeholder="Set a Password (5 characters)" maxlength="5" required />
                         <label type="text" for="zip"></label>
                         <input type="text" id="zip" placeholder="Zip Code" required>
                         <label type="text" for="genre1"></label>
