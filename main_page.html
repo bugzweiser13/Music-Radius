@@ -1,40 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
+<head <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Concerts Near Me</title>
+    <title>Music Radius</title>
     <link rel="icon" href="favicon.ico" />
-    <!--style-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/custom_main_page.css">
+    <!-- Link to Moment.js should go here -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+
     <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Orbitron|Monoton&display=swap" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- LINK TO FIREBASE GOES HERE -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
 </head>
 
 <body>
     <div class="container">
-        <div class="jumbotron mt-2" id="banner">
-            <h1>Concerts Near Me</h1>
-        </div>
         <div class="row">
-            <div class="col-md-8">
-                <div class="card-header">Map</div>
-                <div class="card-body">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d99850.39900068786!2d-117.34184610505122!3d33.97842910360063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1559696604327!5m2!1sen!2sus" width="600" height="450" frameborder="0"
-                        style="border:0" allowfullscreen></iframe>
-
+            <div class="col-sm-12">
+                <div class="card card-default mt-2" id="banner">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h2>Music Radius</h2>
+                        <button id="toggle" class="btn btn-primary">Toggle</button>
+                        <label for="toggle" style="float: right; font-style: italic;">Switch Between Map & Table View:&nbsp;&nbsp;</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="card card-default mt-2" id="mapContainer">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h4>Event Map (Click Location Markers for Event Info)</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card card-default mt-2" id="table">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h4>Event Information Table</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover" style="text-align: center;">
+                            <thead class="thead-light">
+                                <tr style="font-weight: bolder;">
+                                    <th scope="col">Artist</th>
+                                    <th scope="col">Event Date</th>
+                                    <th scope="col">Venue</th>
+                                    <th scope="col">On Sale</th>
+                                    <th scope="col">Ticket Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="event_info">
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
+
+        <div class="row mt-2">
+            <!-- <div class="col-sm-1"></div> -->
+            <div class="col-sm-6">
+                <div class="card card-default" id="user_plot">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h3>User Info</h3>
+                        <!-- <input type="text" id="postalCode" placeholder="zipcode" style="float:right; text-align: center;"></input> -->
+                    </div>
+                    <div class="card-body mb-1" id="user_info">
+                        <form>
+                            <div class="form-group">
+                                <!-- <input type="text" id="user" style="text-align: center; font-style:italic;"> -->
+                                <div id="uName">
+                                    <h3>
+                                        < "User Name Here">
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
+                                <label for="genre">Genre Selected</label> -->
+                                <label for="genre"><h6>Select Genre to Search:</h6>	&nbsp;&nbsp;</label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre" value="rock">
+                                <label class="form-check-label" for="genre">&nbsp;Rock&nbsp;</label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre" value="metal">
+                                <label class="form-check-label" for="genre">&nbsp;Metal&nbsp;</label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre" value="country">
+                                <label class="form-check-label" for="genre">&nbsp;Country&nbsp;</label>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>
+                                <button class="btn btn-secondary" type="submit" id="reset">Clear Data</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-default mb-5" id="spotify">
+                    <div class="card-header" style="font-weight: bolder;">
+                        <h3>Spotify Playback</h3>
+                    </div>
+                    <div class="card-body mb-1" id="spotify2">
+                        <div class="row">
+                            <div class="col-sm-4" id="album_art">
+                                <!-- <image alt="album_cover"></image> -->
+                            </div>
+                            <div class="col-sm-8" id="player"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- <div class="row">
+        <div class="col-sm-11" id="fill"></div>
+
+
+    </div> -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs">
+    </script>
+
+    <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> -->
 
 </body>
+
+<!--link to ticketmaster script-->
+<script src="assets/js/main_page.js "></script>
 
 </html>
