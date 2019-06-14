@@ -133,7 +133,12 @@ td {
     text-shadow: 2px 2px blue;
 }
 
-#user_info h3,
+#user_info h4,
 #user_info h6 {
     text-shadow: 2px 2px blue;
+}
+
+#uName,
+#area {
+    float: left;
 }
