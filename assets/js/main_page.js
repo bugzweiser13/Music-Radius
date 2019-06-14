@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
-    var accessToken = "BQB5UPjLq1om4jDFVvh1yCawD3IkuroReYGEEaqINPtztV0CdNiPSHOVeFb4MtsO3RuQkSTX5WeD7dE8TS0w1kQ4BSqQxONvkuVhHhM-t73qyACElc4e_9dRYvULNkzUhf0lZDvkJ_2dFM8khK8IR_cokg0V2BCBZk7myAvKmFEfjFKIcHn45A95rwIsJTLHXGjxrQGrmFKNXHzaPd0oxZPkyUvbFGRkr6YpObDkxw-dIGMq2y8sbkK0945BrexKns7EcR6m6Ly5wxNR8wtairnmCf-j2ACnmG8";
+    var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
 
     //possible spotify login
     // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
@@ -12,7 +12,7 @@ $(document).ready(function() {
     // var redirect_uri = 'enter http here'; // Your redirect uri
 
     //data search limit (performance)
-    var searchLimit = 20;
+    var searchLimit = 30;
 
     //Google Map
     const lat = 34.0407;
@@ -48,11 +48,13 @@ $(document).ready(function() {
         $("#event_info").empty();
 
         //search input
+        //var postalCode = $("#postalCode").val().trim();
+        // var postalCode = 90210;
         // var genreInput = $("#genre").val().trim();
-        var genreInput = $("input[name='genre']:checked").val();
+        var genreInput = $("input[name='genre']:checked").val().trim();
 
         console.log("Selected Genre is: " + genreInput);
-
+        //console.log("Selected ZipCode is: " + postalCode);
         //spodify data call
         $.ajax({
             url: "https://api.spotify.com/v1/recommendations?seed_genres=" + genreInput + "",
@@ -135,8 +137,8 @@ $(document).ready(function() {
             //global url
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
-            //US url
-            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+            //US url with postal code
+            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "&postalCode=" + postalCode + "&radius=" + radius + "&unit=miles",
 
             //la area url
             url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
@@ -150,9 +152,11 @@ $(document).ready(function() {
 
                 for (i = 0; i < searchLimit; i++) {
                     //main search variable
-                    //var search = (json._embedded.events[i]);
+                    //var search = (ticketMaster._embedded.events[i]);
+                    console.log(i);
 
                     //date formats
+
                     var showDateRtn = moment(showDate).format("MM/DD/YYYY");
                     var saleDateRtn = moment.utc(saleDate).local().format("MM/DD/YYYY"); // @ HH:MM");
 
