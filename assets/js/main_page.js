@@ -1,24 +1,63 @@
 $(document).ready(function() {
 
     // //Initialize Firebase
-    // var config = {
-    //     apiKey: "AIzaSyBFViyub_erkStzv7HIeYmC7YP1LeisBOc",
-    //     authDomain: "music-near-me2.firebaseapp.com",
-    //     databaseURL: "https://music-near-me2.firebaseio.com/",
-    //     storageBucket: "gs://music-near-me2.appspot.com"
-    // };
+    var config = {
+        apiKey: "AIzaSyD1f2GXVMmAeKefcgxLGolC_gcCHqzan2I",
+        authDomain: "schoolproject1-551be.firebaseapp.com",
+        databaseURL: "https://schoolproject1-551be.firebaseio.com",
+        projectId: "schoolproject1-551be",
+        storageBucket: "schoolproject1-551be.appspot.com",
+        messagingSenderId: "405996084610",
+        appId: "1:405996084610:web:b42201322c399745"
+    };
 
-    // firebase.initializeApp(config);
+    firebase.initializeApp(config);
 
-    // var database = firebase.database();
-    // console.log(database);
+    var database = firebase.database();
+    console.log(database);
+
+    // dataRef.ref().on("child_added", function(snapshot) {
+
+    //     //debugging
+    //     console.log(snapshot.val());
+    //     console.log(snapshot.val().name);
+    //     console.log(snapshot.val().email);
+    //     console.log(snapshot.val().userName);
+    //     console.log(snapshot.val().password);
+    //     console.log(snapshot.val().areaCode);
+    //     console.log(snapshot.val().genre1);
+    //     console.log(snapshot.val().genre2);
+    //     console.log(snapshot.val().genre3);
+
+    //     // Handle the errors
+    // }, function(errorObject) {
+    //     console.log("Errors handled: " + errorObject.code);
+    // });
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            // ...
+        } else {
+            // User is signed out.
+            // ...
+        }
+    });
 
     //globals
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
     var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
-    var areaCode = 385;
+    var areaCode = 324;
     var mapCenter;
 
     //possible spotify login
