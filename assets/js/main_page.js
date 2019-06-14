@@ -1,13 +1,22 @@
 $(document).ready(function() {
 
     //globals
+
+    //spodify data token (needs to be updated by the hour)
+    //need to get token to refresh based on login
+    var accessToken = "BQB5UPjLq1om4jDFVvh1yCawD3IkuroReYGEEaqINPtztV0CdNiPSHOVeFb4MtsO3RuQkSTX5WeD7dE8TS0w1kQ4BSqQxONvkuVhHhM-t73qyACElc4e_9dRYvULNkzUhf0lZDvkJ_2dFM8khK8IR_cokg0V2BCBZk7myAvKmFEfjFKIcHn45A95rwIsJTLHXGjxrQGrmFKNXHzaPd0oxZPkyUvbFGRkr6YpObDkxw-dIGMq2y8sbkK0945BrexKns7EcR6m6Ly5wxNR8wtairnmCf-j2ACnmG8";
+
+    //possible spotify login
+    // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
+    // var client_secret = '8318bea258c543538e586b704a29622b'; // Your secret
+    // var redirect_uri = 'enter http here'; // Your redirect uri
+
+    //data search limit (performance)
     var searchLimit = 20;
 
     //Google Map
-    //const myApiKey = `AIzaSyBm4jd3w_aMfh42lvqGRGRdWOM9vDf0bYs`;
     const lat = 34.0407;
     const lng = -118.2468;
-    // const zoom = 6;
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
@@ -27,6 +36,11 @@ $(document).ready(function() {
     // var database = firebase.database();
     // console.log(database);
 
+    //reset page
+    $("#reset").click(function() {
+        document.location.reload();
+    });
+
     //event search submission
     $("#submission").on('click', function() {
 
@@ -34,19 +48,100 @@ $(document).ready(function() {
         $("#event_info").empty();
 
         //search input
-        var genreInput = $("#genre").val().trim();
+        // var genreInput = $("#genre").val().trim();
+        var genreInput = $("input[name='genre']:checked").val();
 
-        //data call
+        console.log("Selected Genre is: " + genreInput);
+
+        //spodify data call
+        $.ajax({
+            url: "https://api.spotify.com/v1/recommendations?seed_genres=" + genreInput + "",
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(spotify) {
+                console.log(spotify);
+
+                // for (j = 0; j < searchLimit; j++) {
+
+                //     // different track links
+                //     // var track = (spotify.tracks[j].href);
+                //     // var track = (spotify.tracks[j].uri);
+                //     var track = (spotify.tracks[j].id);
+                //     var albumArt = (spotify.tracks[j].album.images[0].url);
+
+                //     //data return
+                //     // console.log("Preview Track: " + track);
+                //     // console.log("Album Cover: " + albumArt);
+                // }
+
+
+                //album art display within the img tag
+                //cover will cycle thru every 30 seconds
+                //cover will match song playing
+                (function albumDisplay() {
+
+                    var l = 0
+
+                    function goA() {
+
+                        var albumDisplay = $("<img>");
+                        var albumSkip = (spotify.tracks[l].album.images[0].url);
+                        if (l++ < 20) {
+                            setTimeout(goA, 40000);
+                        }
+
+                        albumDisplay.attr("id", "album");
+                        albumDisplay.attr("src", albumSkip);
+                        albumDisplay.attr("alt", "spotify album_art");
+                        $("#album_art").empty();
+                        $("#album_art").append(albumDisplay);
+                    }
+                    goA();
+                })();
+
+                //music player display within the iframe
+                //song will cycle thru every 30 seconds
+                //song playing will match the album art within the img tag
+                (function playerDisplay() {
+
+                    var k = 0
+
+                    function goP() {
+
+                        var trackDisplay = $("<iframe>");
+                        var trackSkip = (spotify.tracks[k].id);
+                        if (k++ < 20) {
+                            setTimeout(goP, 40000);
+                        }
+
+                        trackDisplay.attr("src", "https://open.spotify.com/embed/track/" + trackSkip + "&autoplay=true");
+                        trackDisplay.attr("id", "player_layout")
+                            // trackDisplay.attr("type" + "audio/mpeg");
+                        $("#player").empty();
+                        $("#player").append(trackDisplay);
+
+                        //console.log(trackSkip);
+                    }
+                    goP();
+                })();
+            }
+        });
+
+        //ticketmaster data call
         $.ajax({
             type: "GET",
             //global url
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
+            //US url
+            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+
             //la area url
             url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
-            //US url
-            //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
+
             dataType: "json",
             success: function(ticketMaster) {
                 console.log(ticketMaster);
@@ -86,15 +181,19 @@ $(document).ready(function() {
                     var tVenue = $("<td>").append(venue);
                     var tSaleDate = $("<td>").append(saleDateRtn);
                     var tLink = $("<td>").append(ticketUrl);
+
+                    //append data to table
                     row.append(tName, tShowDate, tVenue, tSaleDate, tLink);
                     $("#event_info").append(row);
 
+                    //Map Marker Popup info
                     namePop = name;
                     venuePop = venue;
                     showPop = showDateRtn;
                     salePop = saleDateRtn;
                     tktPop = ticketUrl;
 
+                    //push to map function
                     initMap(
                         localLat,
                         localLng,
@@ -133,11 +232,13 @@ $(document).ready(function() {
     //Google Map Marker Population, based on Ticketmaster Data
     function initMap() {
 
-        var uluru = {
+        //marker location placement
+        var eventMarker = {
             lat: localLat,
             lng: localLng,
         };
 
+        //marker popup data display
         var contentString = '<div id=popUp>' +
             '<div id="title">Title: ' + namePop + '</div>' +
             '<div id="venue">Venue: ' + venuePop + '</div>' +
@@ -146,15 +247,18 @@ $(document).ready(function() {
             '<div id="tickets">Tickets: ' + tktPop + '</div>' +
             '</div>';
 
+        //marker popup window command
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
+        //marker popup creation / placement (from ticketmaster api data population)
         var marker = new google.maps.Marker({
-            position: uluru,
+            position: eventMarker,
             map: map
         });
 
+        //click listener to populate the marker info popup
         google.maps.event.addListener(marker, 'click', function() {
             if (!marker.open) {
                 infowindow.open(map, marker);
@@ -170,4 +274,20 @@ $(document).ready(function() {
         });
 
     }
+
+    //toggle between map and table view for events
+    $("#toggle").on('click', function() {
+        var $div1 = $('#mapContainer'),
+            $div2 = $('#table')
+
+        if ($div1.is(':visible')) {
+            $div1.hide();
+            $div2.show();
+        } else if ($div1.is(':visible') && $div2.is(':hidden')) {
+            $div2.show();
+        } else {
+            $div1.show();
+            $div2.hide();
+        }
+    });
 });
