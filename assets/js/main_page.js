@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
-    var accessToken = "BQCHG23OKa17t5PtJmOl9nLlpl_hXFKMVhQVjdaotdiKyjckDqjPpbHbGclTPJcrDvnyZsxOkqCTZSsdsH34OD6kHIj4AEkzLGDjdg59QBk1jWmZfjSxBy5n1SeeAgikSGBO9Ol3hfeBluQl3krlYsisH5APlbacVAUSz7GWcuEpdVPrK4nS8hFIyTgr2o59mYmSkD853AJ_wumEqfpocJhgXjEpcok15FLeUoG3EiWRR5JZrhfuTUDMB2nXaRmH7VcDcyQ7wLjyYbS71O2o7YOTEtA8ysNKYW0";
+    var accessToken = "BQDHmF1RUlq7IrAGs24UTAM1j7emjIwIeeY8cW051EQmJpzflKj7-KZBUvMREvlUbiW_Z_irm0Ouusjpl_EPiXqZwaPPsoCm8oV0P_gxffa-rGPSfAdpSL8rVsI0bKMUzBZIrrDEBtMP9uMIGFC4tVscq6BWi-2uFapduppeTJ3WwRTLZ-CawG_mR-35x_7in5XVoE5W_XPwORk3a5ejmT0k5c1mGLkFn1pppI9o8LxOdyzm7Xs31yUGw80bVERpDtEy4YIdIkH5_8zayENCy3lqNxbjlbjgvQs";
 
 
     //possible spotify login
