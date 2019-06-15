@@ -12,53 +12,65 @@ $(document).ready(function() {
     };
 
     firebase.initializeApp(config);
+    var dataRef = firebase.database();
+    //debugging
+    console.log(dataRef);
 
-    var database = firebase.database();
-    console.log(database);
+    dataRef.ref().on("child_added", function(snapshot) {
 
-    // dataRef.ref().on("child_added", function(snapshot) {
+        //debugging
+        // console.log(snapshot.val());
+        // console.log(snapshot.val().name);
+        // console.log(snapshot.val().email);
+        // console.log(snapshot.val().userName);
+        // console.log(snapshot.val().password);
+        // console.log(snapshot.val().areaCode);
+        // console.log(snapshot.val().genre1);
+        // console.log(snapshot.val().genre2);
+        // console.log(snapshot.val().genre3);
 
-    //     //debugging
-    //     console.log(snapshot.val());
-    //     console.log(snapshot.val().name);
-    //     console.log(snapshot.val().email);
-    //     console.log(snapshot.val().userName);
-    //     console.log(snapshot.val().password);
-    //     console.log(snapshot.val().areaCode);
-    //     console.log(snapshot.val().genre1);
-    //     console.log(snapshot.val().genre2);
-    //     console.log(snapshot.val().genre3);
-
-    //     // Handle the errors
-    // }, function(errorObject) {
-    //     console.log("Errors handled: " + errorObject.code);
-    // });
-
-
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            // ...
-        } else {
-            // User is signed out.
-            // ...
-        }
+        // Handle the errors
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
     });
 
     //globals
 
+    //get userName areaCode from url
+    function getUrlParams() {
+
+        var paramMap = {};
+        if (location.search.length == 1) {
+            return paramMap;
+        }
+        var parts = location.search.substring(1).split("&");
+
+        for (var i = 0; i < parts.length; i++) {
+            var component = parts[i].split("=");
+            paramMap[decodeURIComponent(component[0])] = decodeURIComponent(component[1]);
+        }
+        return paramMap;
+    }
+
+    var params = getUrlParams();
+    var userName = params['userName']; // or params.id
+    var areaCode = params['areaCode']; // or params.id;
+    // var areaCode1 = number(areaCode);
+    var mapCenter;
+    var areaDisplay;
+    var gen1;
+    var gen2;
+    var gen3;
+
+    //url debugging
+    console.log(areaCode);
+    console.log("Loaded User Name: " + userName);
+
+
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
     var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
-    var areaCode = 324;
-    var mapCenter;
+
 
     //possible spotify login
     // var client_id = '0a5b270d91654c18b699e5c577421c7d'; // Your client id
@@ -79,32 +91,32 @@ $(document).ready(function() {
 
     //map load variables
     var areaCodePos = [{
-            name: "la",
-            code: 324,
+            name: "Los Angeles",
+            code: "324",
             position: {
                 lat: 34.0407,
                 lng: -118.2468
             }
         },
         {
-            name: "ny",
-            code: 345,
+            name: "New York",
+            code: "345",
             position: {
                 lat: 25.7617,
                 lng: -74.0060
             }
         },
         {
-            name: "mia",
-            code: 334,
+            name: "Miami",
+            code: "334",
             position: {
                 lat: 26.1224,
                 lng: -80.1373
             }
         },
         {
-            name: "sea",
-            code: 385,
+            name: "Seattle",
+            code: "385",
             position: {
                 lat: 47.6062,
                 lng: -122.3321
@@ -118,17 +130,27 @@ $(document).ready(function() {
 
     //map load position
     if (areaCode === areaCodePos[0].code) {
-        mapCenter = areaCodePos[0].position
+        mapCenter = areaCodePos[0].position,
+            areaDisplay = areaCodePos[0].name
     } else if (areaCode === areaCodePos[1].code) {
-        mapCenter = areaCodePos[1].position
+        mapCenter = areaCodePos[1].position,
+            areaDisplay = areaCodePos[1].name
     } else if (areaCode === areaCodePos[2].code) {
-        mapCenter = areaCodePos[2].position
+        mapCenter = areaCodePos[2].position,
+            areaDisplay = areaCodePos[2].name
     } else if (areaCode === areaCodePos[3].code) {
-        mapCenter = areaCodePos[3].position
+        mapCenter = areaCodePos[3].position,
+            areaDisplay = areaCodePos[3].name
     };
 
     //debugging
     console.log(mapCenter);
+    console.log(areaDisplay);
+
+    //user Information HTML population
+    $("#uNamePop").append(userName);
+    $("#areaPop").append(areaDisplay);
+
 
     //selectable
     var map = new google.maps.Map(document.getElementById('map'), {

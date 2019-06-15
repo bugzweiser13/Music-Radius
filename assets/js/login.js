@@ -12,28 +12,14 @@ $(document).ready(function() {
 
     firebase.initializeApp(config);
     var dataRef = firebase.database();
+    //debugging
     console.log(dataRef);
-
-    // var name = "";
-    // var email = "";
-    // var userName = "";
-    // var password = "";
-    // var areaCode = "";
-    // var genre1 = "";
-    // var genre2 = "";
-    // var genere3 = "";
-
-
 
     dataRef.ref().on("child_added", function(snapshot) {
 
-        console.log("User Name: " + snapshot.val().userName);
-        console.log("User Name: " + snapshot.val().password);
-
-
-
-
-
+        // debugging
+        // console.log("User Name: " + snapshot.val().userName);
+        // console.log("User Name: " + snapshot.val().password);
 
 
         $("#sign-in").on('click', function() {
@@ -45,27 +31,18 @@ $(document).ready(function() {
             var signInName = $("#userName").val().trim();
             var signInPw = $("#password").val().trim();
 
-            console.log("User Submitted: " + signInName);
-            console.log("User Submitted: " + signInPw);
+            // debugging
+            // console.log("User Submitted: " + signInName);
+            // console.log("User Submitted: " + signInPw);
 
             if (signInName === dbUserName && signInPw === dbPassword) {
-                console.log("true");
-                window.open('main_page.html');
+                //console.log("true");
+                var myUrl = "main_page.html?userName=" + snapshot.val().userName + "&areaCode=" + snapshot.val().areaCode;
+                window.open(myUrl, "_blank"); //?&areaCode=' + areaCode + '&userName=' + userName + '');
             } else {
-                console.log("false");
-
+                //console.log("false");
+                location.reload();
             }
-
-
-            // var starCountRef = firebase.database().ref(userName);
-            // starCountRef.on('value', function(snapshot) {
-            //     updateStarCount(postElement, snapshot.val());
-            // });
-
-            //return firebase.database().ref(userName).once('value'); //.then(function(snapshot) {
-            //     var username = (snapshot.val() && snapshot.val().userName) || 'Anonymous';
-            //     console.log(username);
-            // })
         });
     });
 
