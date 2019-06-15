@@ -14,7 +14,7 @@ $(document).ready(function() {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
     //debugging
-    console.log(dataRef);
+    // console.log(dataRef);
 
     dataRef.ref().on("child_added", function(snapshot) {
 
@@ -66,14 +66,10 @@ $(document).ready(function() {
     //url debugging
     // console.log(areaCode);
     // console.log("Loaded User Name: " + userName);
-    console.log(genrePop1);
-    console.log(genrePop2);
-    console.log(genrePop3);
-
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
-    var accessToken = "BQBnsfvcGKiNjkwRukOeUX24dU_vF5_T-ugV-5B9urrJLt_6ofkr0_58kUf5YXjKe5KVpkaIoQeGDZItqgmr1SNBljskzP-jzypz6U0ba2m0IIWT5bMf9TTKjZXgeO5TTSulujYMkCn04DVhCC9xTpZGtFr9R3sMLhk9p_jDh3ew-iE5vTvrb0oJC0KxDX3HO2nnlWUcyVEObb3twWPcIeBLJEjskLTckOjqis7eMREu3g2yNhoAce5XPtVUwBtcVAEYNptaSnvrs-AXDeoieOtG_vZz2FiXnRg";
+    var accessToken = "BQA-y_xLmxHmRdIe1NSF_Mizy92fr5M46vT-AvGWZwQaG3u0TTUpMwDnXs9kX2N59Bp-zXcFfjI3R92rUu9gB7J3ax12D-yGaDOqdvoMEj5kzuF2swQaCctAuc0nyMs3RgUs72oJkudutS08nupIep-ORg_LsLLsHAcusQKOXq9vHjAH3Xawff4XPUmJWRwxxfs_dwWaa1VzAkkDnHrJFBkzhkMSJPpUOILLUVG2I0khCApYAA2rwiSTIbTpAKO6Vv0dPQas0uUxlghfMfZE001eKFf-aie5E9U";
 
 
     //possible spotify login
@@ -132,8 +128,8 @@ $(document).ready(function() {
     // console.log(areaCode);
     // console.log(areaCodePos[0].code);
 
-    //map load position
-    //user area html load
+    //map opening load position
+    //user search area html load
     if (areaCode === areaCodePos[0].code) {
         mapCenter = areaCodePos[0].position,
             areaDisplay = areaCodePos[0].name
@@ -151,10 +147,10 @@ $(document).ready(function() {
     //debugging
     // console.log(mapCenter);
     // console.log(areaDisplay);
-    console.log("is this? " + genrePop1);
+    // console.log("is this? " + genrePop1);
 
 
-    //user Information HTML population
+    //user Information / genre radio buttons HTML population
     $("#uNamePop").append(userName + "&nbsp;&nbsp;");
     $("#areaPop").append("&nbsp;&nbsp;" + areaDisplay);
     $("#genLab1").html(genrePop1 + "&nbsp;&nbsp;");
@@ -164,13 +160,7 @@ $(document).ready(function() {
     $("#genLab3").html(genrePop3 + "&nbsp;&nbsp;");
     $("#genre3").attr("value", genrePop3);
 
-    // $("#gen2").append(gen2 + "&nbsp;&nbsp;");
-    // $("#genre2").append("val", gen2);
-    // $("#gen3").append(gen3 + "&nbsp;&nbsp;");
-    // $("#genre3").append("val", gen3);
-
-
-    //selectable
+    //area selectable map 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 7,
         center: mapCenter
@@ -194,12 +184,10 @@ $(document).ready(function() {
         $("#event_info").empty();
 
         //search input
-        //var areaCode = $("#areaCode").val().trim();
-        // var genreInput = $("#genre").val().trim();
         var genreInput = $("input[name='genre']:checked").val().trim();
 
         console.log("Selected Genre is: " + genreInput);
-        //console.log("Selected ZipCode is: " + postalCode);
+
         //spodify data call
         $.ajax({
             url: "https://api.spotify.com/v1/recommendations?seed_genres=" + genreInput + "",
@@ -265,16 +253,16 @@ $(document).ready(function() {
         //ticketmaster data call
         $.ajax({
             type: "GET",
-            //global url
+            //global url (too vauge)
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
-            //US url with postal code
+            //US url with postal code (too specific)
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "&postalCode=" + postalCode + "&radius=" + radius + "&unit=miles",
 
-            //la area url
+            //la area url (testing)
             //url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=324&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
-            //selectable area
+            //selectable area (final production)
             url: "https://app.ticketmaster.com/discovery/v2/events.json?&dmaId=" + areaCode + "&apikey=Gtk77jcaAuFCC19bpqEWrINnFUHvix20&classificationName=" + genreInput + "",
 
             dataType: "json",
@@ -282,7 +270,7 @@ $(document).ready(function() {
                 console.log(ticketMaster);
 
                 //console.log("Genre Requested: " + genreInput);
-                console.log("Area Code:  " + areaCode);
+                // console.log("Area Code:  " + areaCode);
 
                 for (i = 0; i < searchLimit; i++) {
                     //main search variable
@@ -395,7 +383,7 @@ $(document).ready(function() {
             map: map
         });
 
-        //click listener to populate the marker info popup
+        //click listener to populate the marker information popup
         google.maps.event.addListener(marker, 'click', function() {
             if (!marker.open) {
                 infowindow.open(map, marker);
@@ -412,7 +400,7 @@ $(document).ready(function() {
 
     }
 
-    //toggle between map and table view for events
+    //toggle between map and table view for events (div hide)
     $("#toggle").on('click', function() {
         var $div1 = $('#mapContainer'),
             $div2 = $('#table')
