@@ -173,9 +173,9 @@ $(document).ready(function() {
     // });
 
     //reset page
-    $("#reset").click(function() {
-        document.location.reload();
-    });
+    // $("#reset").click(function() {
+    //     deleteMarkers();
+    // });
 
     //event search submission
     $("#submission").on('click', function() {
@@ -397,7 +397,6 @@ $(document).ready(function() {
                 marker.open = false;
             });
         });
-
     }
 
     //toggle between map and table view for events (div hide)
