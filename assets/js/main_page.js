@@ -52,24 +52,28 @@ $(document).ready(function() {
         return paramMap;
     }
 
+    //url variables
     var params = getUrlParams();
-    var userName = params['userName']; // or params.id
-    var areaCode = params['areaCode']; // or params.id;
+    var userName = params['userName'];
+    var areaCode = params['areaCode'];
+    var genrePop1 = params['_genre1'];
+    var genrePop2 = params['_genre2'];
+    var genrePop3 = params['_genre3'];
     // var areaCode1 = number(areaCode);
     var mapCenter;
     var areaDisplay;
-    var gen1;
-    var gen2;
-    var gen3;
 
     //url debugging
-    console.log(areaCode);
-    console.log("Loaded User Name: " + userName);
+    // console.log(areaCode);
+    // console.log("Loaded User Name: " + userName);
+    console.log(genrePop1);
+    console.log(genrePop2);
+    console.log(genrePop3);
 
 
     //spodify data token (needs to be updated by the hour)
     //need to get token to refresh based on login
-    var accessToken = "BQCwvGKKdAvntwnnTTHhIoUL8UojD5cox49IOQaoVf4qW28rCz2I5yiKZj9FHzxof6XpnD4TPppp_4LeZIinjq4y9-TG3_lA4GWBJNxriBzucx8YlY3L9VEPnVAPoA329dCny2kbcQp1hAaeP_amrK7oIbA2RSL38_KRW8oMyA0uSqWa8nW63DeSP_EUal8-W9oatu7hjsW2mH2bQEVTYEEGgssACurCiU9OwXTLVn2qkms3xu_O-ys14DzMz5DBCuuH8Qettq5i5V0Psj_wWVIsf3l-SWOKhoo";
+    var accessToken = "BQBnsfvcGKiNjkwRukOeUX24dU_vF5_T-ugV-5B9urrJLt_6ofkr0_58kUf5YXjKe5KVpkaIoQeGDZItqgmr1SNBljskzP-jzypz6U0ba2m0IIWT5bMf9TTKjZXgeO5TTSulujYMkCn04DVhCC9xTpZGtFr9R3sMLhk9p_jDh3ew-iE5vTvrb0oJC0KxDX3HO2nnlWUcyVEObb3twWPcIeBLJEjskLTckOjqis7eMREu3g2yNhoAce5XPtVUwBtcVAEYNptaSnvrs-AXDeoieOtG_vZz2FiXnRg";
 
 
     //possible spotify login
@@ -102,7 +106,7 @@ $(document).ready(function() {
             name: "New York",
             code: "345",
             position: {
-                lat: 25.7617,
+                lat: 40.7128,
                 lng: -74.0060
             }
         },
@@ -125,10 +129,11 @@ $(document).ready(function() {
     ];
 
     //debugging
-    console.log(areaCode);
-    console.log(areaCodePos[0].code);
+    // console.log(areaCode);
+    // console.log(areaCodePos[0].code);
 
     //map load position
+    //user area html load
     if (areaCode === areaCodePos[0].code) {
         mapCenter = areaCodePos[0].position,
             areaDisplay = areaCodePos[0].name
@@ -144,12 +149,25 @@ $(document).ready(function() {
     };
 
     //debugging
-    console.log(mapCenter);
-    console.log(areaDisplay);
+    // console.log(mapCenter);
+    // console.log(areaDisplay);
+    console.log("is this? " + genrePop1);
+
 
     //user Information HTML population
-    $("#uNamePop").append(userName);
-    $("#areaPop").append(areaDisplay);
+    $("#uNamePop").append(userName + "&nbsp;&nbsp;");
+    $("#areaPop").append("&nbsp;&nbsp;" + areaDisplay);
+    $("#genLab1").html(genrePop1 + "&nbsp;&nbsp;");
+    $("#genre1").attr("value", genrePop1);
+    $("#genLab2").html(genrePop2 + "&nbsp;&nbsp;");
+    $("#genre2").attr("value", genrePop2);
+    $("#genLab3").html(genrePop3 + "&nbsp;&nbsp;");
+    $("#genre3").attr("value", genrePop3);
+
+    // $("#gen2").append(gen2 + "&nbsp;&nbsp;");
+    // $("#genre2").append("val", gen2);
+    // $("#gen3").append(gen3 + "&nbsp;&nbsp;");
+    // $("#genre3").append("val", gen3);
 
 
     //selectable
@@ -191,20 +209,6 @@ $(document).ready(function() {
             },
             success: function(spotify) {
                 console.log(spotify);
-
-                // for (j = 0; j < searchLimit; j++) {
-
-                //     // different track links
-                //     // var track = (spotify.tracks[j].href);
-                //     // var track = (spotify.tracks[j].uri);
-                //     var track = (spotify.tracks[j].id);
-                //     var albumArt = (spotify.tracks[j].album.images[0].url);
-
-                //     //data return
-                //     // console.log("Preview Track: " + track);
-                //     // console.log("Album Cover: " + albumArt);
-                // }
-
 
                 //album art display within the img tag
                 //cover will cycle thru every 30 seconds

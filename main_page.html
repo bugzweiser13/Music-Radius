@@ -33,6 +33,7 @@
             <div class="col-sm-12">
                 <div class="card card-default mt-2" id="banner">
                     <div class="card-header" style="font-weight: bolder;">
+                        <button id="sign_out" class="btn btn-light" style="float: right;" onclick="window.close();">Sign Out</button>
                         <h2>Music Radius</h2>
                         <button id="toggle" class="btn btn-primary">Toggle</button>
                         <label for="toggle" style="float: right; font-style: italic;">Switch Between Map & Table View:&nbsp;&nbsp;</label>
@@ -97,19 +98,19 @@
                                     <h4 id="uNamePop">&nbsp;</h4>
                                 </div>
                                 <div>
-                                    <h4 id="areaPop">&nbsp;</h4>
+                                    <h4 id="areaPop">&nbsp;&nbsp;</h4>
                                 </div>
                             </div>
                             <div class="form-check form-check-inline">
                                 <!-- <input type="text" id="genre" style="text-align: center; font-style:italic;" placeholder="Search By Genre">
                                 <label for="genre">Genre Selected</label> -->
                                 <label for="genre"><h6>Select Genre to Search:</h6>	&nbsp;&nbsp;</label>
-                                <input class="form-check-input" type="radio" name="genre" id="genre" value="rock">
-                                <label class="form-check-label" for="genre">&nbsp;Rock&nbsp;</label>
-                                <input class="form-check-input" type="radio" name="genre" id="genre" value="metal">
-                                <label class="form-check-label" for="genre">&nbsp;Metal&nbsp;</label>
-                                <input class="form-check-input" type="radio" name="genre" id="genre" value="country">
-                                <label class="form-check-label" for="genre">&nbsp;Country&nbsp;</label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre1">
+                                <label class="form-check-label" for="genre1" id="genLab1"></label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre2">
+                                <label class="form-check-label" for="genre2" id="genLab2"></label>
+                                <input class="form-check-input" type="radio" name="genre" id="genre3">
+                                <label class="form-check-label" for="genre3" id="genLab3"></label>
                             </div>
                             <div class="buttons">
                                 <button class="btn btn-primary" style="margin-left: 10px;" type="submit" id="submission">Search</button>

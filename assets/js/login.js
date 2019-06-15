@@ -20,10 +20,14 @@ $(document).ready(function() {
         // debugging
         // console.log("User Name: " + snapshot.val().userName);
         // console.log("User Name: " + snapshot.val().password);
-
+        // console.log(snapshot.val().genre1);
+        // console.log(snapshot.val().genre2);
+        // console.log(snapshot.val().genre3);
 
         $("#sign-in").on('click', function() {
             event.preventDefault();
+
+
 
             var dbUserName = snapshot.val().userName;
             var dbPassword = snapshot.val().password;
@@ -37,8 +41,14 @@ $(document).ready(function() {
 
             if (signInName === dbUserName && signInPw === dbPassword) {
                 //console.log("true");
-                var myUrl = "main_page.html?userName=" + snapshot.val().userName + "&areaCode=" + snapshot.val().areaCode;
-                window.open(myUrl, "_blank"); //?&areaCode=' + areaCode + '&userName=' + userName + '');
+                var myUrl = "main_page.html?userName=" +
+                    snapshot.val().userName + "&areaCode=" +
+                    snapshot.val().areaCode + "&_genre1=" +
+                    snapshot.val().genre1 + "&_genre2=" +
+                    snapshot.val().genre2 + "&_genre3=" +
+                    snapshot.val().genre3
+
+                window.open(myUrl, "_blank");
             } else {
                 //console.log("false");
                 location.reload();
